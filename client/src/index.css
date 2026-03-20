@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans;
+  }
+
+  .prose-editor {
+    @apply font-serif text-lg leading-relaxed;
+  }
+
+  .prose-editor p {
+    @apply mb-4;
+  }
+
+  .prose-editor h1 {
+    @apply text-3xl font-bold mb-6 font-sans;
+  }
+
+  .prose-editor h2 {
+    @apply text-2xl font-bold mb-4 font-sans;
+  }
+
+  .prose-editor h3 {
+    @apply text-xl font-semibold mb-3 font-sans;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800;
+  }
+
+  .btn-secondary {
+    @apply btn bg-ink-200 text-ink-700 hover:bg-ink-300 active:bg-ink-400;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink-600 hover:bg-ink-100 active:bg-ink-200;
+  }
+
+  .input {
+    @apply w-full px-4 py-2.5 rounded-lg border border-ink-300 bg-white text-ink-900 placeholder-ink-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-ink-200 shadow-sm;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Screenplay Editor — Industry Standard Format
+   US Letter: Courier 12pt, 1 page ≈ 1 minute
+   ═══════════════════════════════════════════ */
+
+.screenplay-page {
+  @apply flex flex-col h-full;
+}
+
+.screenplay-toolbar {
+  @apply flex items-center gap-1 px-4 py-2 bg-ink-50 border-b border-ink-200 sticky top-14 z-30;
+}
+
+.screenplay-toolbar-btn {
+  @apply px-3 py-1 text-xs font-medium rounded transition-colors text-ink-600 hover:bg-ink-200;
+}
+
+.screenplay-toolbar-btn.active {
+  @apply bg-primary-100 text-primary-700;
+}
+
+.screenplay-paper {
+  @apply mx-auto py-8;
+  max-width: 8.5in;
+  min-height: 11in;
+  background: white;
+  padding-left: 1.5in;
+  padding-right: 1in;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12pt;
+  line-height: 1;
+}
+
+/* Scene Heading / Slug Line */
+.screenplay-scene-heading {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 24pt;
+  margin-bottom: 12pt;
+  letter-spacing: 0.02em;
+}
+
+.screenplay-scene-heading:first-child {
+  margin-top: 0;
+}
+
+/* Action */
+.screenplay-action {
+  margin-top: 12pt;
+  margin-bottom: 12pt;
+  width: 100%;
+}
+
+/* Character Cue */
+.screenplay-character {
+  text-transform: uppercase;
+  margin-top: 12pt;
+  margin-bottom: 0;
+  padding-left: 2.2in;
+  font-weight: normal;
+}
+
+/* Dialogue */
+.screenplay-dialogue {
+  margin-top: 0;
+  margin-bottom: 12pt;
+  padding-left: 1in;
+  padding-right: 1.5in;
+}
+
+/* Parenthetical */
+.screenplay-parenthetical {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 1.6in;
+  padding-right: 2in;
+  font-style: normal;
+}
+
+.screenplay-parenthetical::before {
+  content: '(';
+}
+
+.screenplay-parenthetical::after {
+  content: ')';
+}
+
+/* Transition */
+.screenplay-transition {
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 12pt;
+  margin-bottom: 12pt;
+}
+
+/* Placeholder styling for screenplay elements */
+.screenplay-editor .is-empty::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-style: italic;
+}
+
+/* Override ProseMirror defaults inside screenplay */
+.screenplay-editor p {
+  margin: 0;
+}
+
+.screenplay-editor {
+  caret-color: #212529;
+}
+
+/* ═══════════════════════════════════════════
+   Ghost Text — Inline AI Suggestions
+   ═══════════════════════════════════════════ */
+
+.ghost-text {
+  color: #adb5bd;
+  pointer-events: none;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════
+   Mobile Responsive Overrides
+   ═══════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════
+   Achievement Toast Animation
+   ═══════════════════════════════════════════ */
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out forwards;
+}
+
+@media (max-width: 640px) {
+  .screenplay-paper {
+    padding-left: 0.5in;
+    padding-right: 0.5in;
+    max-width: 100%;
+    min-height: auto;
+  }
+
+  .screenplay-character {
+    padding-left: 1in;
+  }
+
+  .screenplay-dialogue {
+    padding-left: 0.5in;
+    padding-right: 0.5in;
+  }
+
+  .screenplay-parenthetical {
+    padding-left: 0.8in;
+    padding-right: 0.8in;
+  }
+}
